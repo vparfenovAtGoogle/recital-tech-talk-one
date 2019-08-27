@@ -1,4 +1,7 @@
 var CreoJS = (function () {
+    if(!window.external || !window.external.ptc) {
+        alert ("This page is not running in Creo Embedded Browers.\nSome functionality will not be available")
+    }
     if (typeof Promise === 'undefined') {
         Promise = (function () {
             function NOOP() {}
@@ -447,8 +450,6 @@ var CreoJS = (function () {
         metadata.command = command;
         var checkRes = verifyString (payload);
         if (checkRes.isOK) {
-            //alert ('StartReplay?' + JSON.stringify (metadata) + '\n|' + buildPayloadMessage (payload))
-            //window.external.ptc ('StartReplay=v8?' + JSON.stringify (metadata) + '\n|\n' + (payload ? payload : ''));
             window.external.ptc ('ToolkitJSBridge=v8?' + JSON.stringify (metadata) + '\n|\n' + (payload ? payload : ''));
         }
         else {

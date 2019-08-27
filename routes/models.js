@@ -16,7 +16,8 @@ router.get('/', function(req, res, next) {
       modification: change.modType,
       time: new Date (change.time).toLocaleString (),
       url: change.downloadUri,
-      submission: submission ? `username=${user}&model=${modelName}&submission=${submission.fileName}` : null
+      submission: submission ? `username=${user}&model=${modelName}&submission=${submission.fileName}` : null,
+      principal: req.headers ['x-ms-client-principal-name']
     }
   })
   res.render('models', {
