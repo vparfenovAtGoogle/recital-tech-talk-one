@@ -20,7 +20,7 @@
     if (true) CreoJS.$ADD_ON_UNLOAD (function () {CreoJS.clearListeners ()})
     if (true) CreoJS.$ONPRINT = function (text) {
       var output = document.getElementById ('output')
-      var line = document.createElement ('div')
+      var line = document.createElement ('pre')
       line.innerText = text
       output.appendChild (line)
     }
@@ -28,9 +28,11 @@
   </script>
 </head>
 <body>
+  <div style="margin-right:10px">
+    <button style="position:relative; float:right" onclick="clearOutput()">Clear</button>
+  </div>
   <h4>Testing Creo.JS!</h4>
   <a href="users">Users</a><br>
-  <button onclick="clearOutput()">Clear</button>
   <div id=output></div>
 </body>
 </html>

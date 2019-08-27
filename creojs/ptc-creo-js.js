@@ -29,7 +29,7 @@ function copyDir (src, dst) {
   })
 }
 
-module.exports.bootstrap = (root, js) => {
+module.exports.bootstrap = (root, js = 'creojsweb') => {
   const jsdst = path.join (root, js)
   const jssrc = path.join (__dirname, 'www')
   console.log (`copy ${jssrc} to ${jsdst}`)

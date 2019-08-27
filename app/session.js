@@ -44,11 +44,24 @@ class ModelSubmission extends ModelAuditRecord  {
     super (model)
     const changeCount = model.changes.length
     this.lastChange = changeCount - 1
+    this.likes = {}
     if (changeCount > 0) model.changes [this.lastChange].submission = this
   }
   get fileName () {return this.uuid}
+  like (username, like=true) {
+    if (like) {
+      this.likes [username] = username
+    }
+    else {
+      this.unlike (username)
+    }
+  }
+  unlike (username) {
+    if (username in this.likes) delete this.likes [username]
+  }
+  get likeCount () {return Object.keys (this.likes).length}
   toJSON () {
-    return {fileName: this.fileName, lastChange: this.lastChange}
+    return {uuid: this.uuid, fileName: this.fileName, lastChange: this.lastChange, likes: this.likeCount}
   }
 }
 
@@ -74,6 +87,15 @@ class Model {
   }
   listSubmissions () {
     return this.submissions
+  }
+  getSubmission (uuid) {
+    return this.submissions.find (s => s.uuid == uuid)
+  }
+  likeSubmission (uuid, user, like) {
+    const subm = this.getSubmission (uuid)
+    if (subm) {
+      subm.like (user, like)
+    }
   }
   get uri () {
     return `${this.user.uri}/${this.name}`

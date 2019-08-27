@@ -5,6 +5,7 @@ const sessionDb = require ('../app/init').sessionDb
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+  const principal = req.query.principal || req.headers ['x-ms-client-principal-name']
   const user = req.query.username
   const modelName = req.query.model
   const model = sessionDb.getUser (user).getModel (modelName)
@@ -16,12 +17,15 @@ router.get('/', function(req, res, next) {
       modification: change.modType,
       time: new Date (change.time).toLocaleString (),
       url: change.downloadUri,
-      submission: submission ? `username=${user}&model=${modelName}&submission=${submission.fileName}` : null
+      submission: submission ? `username=${user}&model=${modelName}&submission=${submission.fileName}` : undefined,
+      uuid: submission ? submission.uuid : undefined,
+      likes: submission ? submission.likeCount : undefined
     }
   })
   res.render('models', {
+    scripts: ["/creojsweb/ptc-api-call.js", "/javascripts/models.js"],
     student: user,
-    principal: req.headers ['x-ms-client-principal-name'],
+    principal,
     model: modelName,
     imagesUri: model.user.session.imagesUri,
     modelsUri: model.user.session.modelsUri,

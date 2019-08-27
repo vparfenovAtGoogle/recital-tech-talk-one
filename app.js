@@ -9,7 +9,7 @@ var usersRouter = require('./routes/users');
 var modelsRouter = require('./routes/models');
 var fileRouter = require('./app/filestore');
 
-require ('./creojs/ptc-creo-js').bootstrap (`${__dirname}/public`, 'creojsweb')
+require ('./creojs/ptc-creo-js').bootstrap (`${__dirname}/public`)
 
 var app = express();
 
