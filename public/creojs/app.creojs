@@ -1,22 +1,23 @@
 {
 	const session = pfcSession.Current
-	//const serverURL = 'http://localhost:3000'
-	//const serverURL = 'https://gdc-vparfenov-cloud-apps-nodejs-webapp.azurewebsites.net'
-	//const serverURL = 'https://vparfenov-tch-talk-web-app.azurewebsites.net'
+
 	function askQuestion (question) {
 		return session.showDialog (
 			{label: question, type: pfcMessageDialogType.MESSAGE_QUESTION, focus: pfcMessageButton.MESSAGE_BUTTON_NO,
 			 buttons: [pfcMessageButton.MESSAGE_BUTTON_YES, pfcMessageButton.MESSAGE_BUTTON_NO]}
 		) === pfcMessageButton.MESSAGE_BUTTON_YES
 	}
+
 	function executeQueryDebug (query) {
 		rest.call (query, '/api')
 			.then (res => print (`REST response: ${JSON.stringify (res, null, 2)}`))
 			.catch (res => print (`Rest error: ${JSON.stringify (res, null, 2)}`))
 	}
+
 	function executeQuery (query) {
 		return rest.call (query, '/api')
 	}
+
 	function uploadFileAs ({fileName, fieldName, appdir='public/app/images'}) {
 		fieldName = fieldName || fileName
 		print (`uploading ${fileName} as ${fieldName}`)
@@ -24,6 +25,7 @@
       .then (res => print (`Upload response: ${JSON.stringify (res, null, 2)}`))
       .catch (res => print (`Upload error: ${JSON.stringify (res, null, 2)}`))
 	}
+
 	function registerFeatureModification (id, type, modification) {
 		const window = session.CurrentWindow
 		const model = window.GetModel()
@@ -44,12 +46,13 @@
       	.catch (res => print (`Upload error: ${JSON.stringify (res, null, 2)}`))
 		}
 	}
-	CreoJS.clearListeners()
+
 	const solidListener = {
 		OnAfterFeatureCreate: (solid, feature) => registerFeatureModification (feature.Id, feature.FeatType.string (), 'create'),
 		OnAfterFeatureDelete: (solid, id) => registerFeatureModification (feature.Id, null, 'delete')
 	}
 	CreoJS.addListener (session, pfcSolidActionListener.create (solidListener))
+
 	const modelListener = {
 		OnAfterModelSave : modelDescr => {
 			const fileName = modelDescr.GetFileName()

@@ -5,12 +5,10 @@ const googleAuthSecret = process.env ['WEBSITE_AUTH_GOOGLE_CLIENT_SECRET']
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  const userAgent = req.headers ['user-agent']
-  const principal = req.query.principal || req.headers ['x-ms-client-principal-name']
-  if (principal) {
+  if (req.principal) {
     res.redirect ('/users')
   }
-  else if (userAgent && userAgent.indexOf ('Creo') > -1) {
+  else if (req.isCreoAgent) {
     res.redirect ('/creo_app.html')
   }
   else if (googleAuthSecret) {

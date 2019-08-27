@@ -23,13 +23,24 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use((req, res, next) => {
+  req.principal = req.query.principal || req.headers ['x-ms-client-principal-name']
+  next ()
+})
+
+app.use((req, res, next) => {
+  const userAgent = req.headers ['user-agent']
+  req.isCreoAgent = (userAgent && userAgent.indexOf ('Creo') > -1)
+  next ()
+})
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/models', modelsRouter);
 app.use('/files', fileRouter);
+
 const appData = require ('./app/init')
-const apiRouter = appData.apiRouter
-app.use('/api', apiRouter);
+app.use('/api', appData.apiRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
