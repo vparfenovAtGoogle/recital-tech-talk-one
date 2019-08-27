@@ -1,0 +1,20 @@
+<h2>Student: {{student}}</h2>
+<h3>model: {{model}}</h3>
+<table class="table table-hover table-condensed table-bordered table-sm">
+  <thead class="thead-dark"><th class="w-10">Feature ID</th><th class="w-10">Feature Type</th><th class="w-10">Change Type</th><th class="w-10">Time</th><th class="w-60">Image</th></thead>
+  {{#each changes}}
+  <tr>
+    <td>{{id}}</td>
+    <td>{{type}}</td>
+    <td style="text-align:center">{{modification}}</td>
+    <td>{{time}}</td>
+    <td>
+      {{#if submission}}
+        <a title="Open in Creo" href="javascript:openInCreo ('{{submission}}')"><img style="border: 2px solid red ;border-radius: 25px;" height="150" width="150" src="{{url}}"></a>
+      {{else}}
+        <img style="border: 2px solid gray; border-radius: 25px;"  height="150" width="150" src="{{url}}">
+      {{/if}}
+   </td>
+  </tr>
+  {{/each}}
+</table>
