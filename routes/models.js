@@ -16,12 +16,12 @@ router.get('/', function(req, res, next) {
       modification: change.modType,
       time: new Date (change.time).toLocaleString (),
       url: change.downloadUri,
-      submission: submission ? `username=${user}&model=${modelName}&submission=${submission.fileName}` : null,
-      principal: req.headers ['x-ms-client-principal-name']
+      submission: submission ? `username=${user}&model=${modelName}&submission=${submission.fileName}` : null
     }
   })
   res.render('models', {
     student: user,
+    principal: req.headers ['x-ms-client-principal-name'],
     model: modelName,
     imagesUri: model.user.session.imagesUri,
     modelsUri: model.user.session.modelsUri,

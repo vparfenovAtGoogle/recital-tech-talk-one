@@ -7,12 +7,13 @@ const sessionDb = require ('../app/init').sessionDb
 router.get('/', function(req, res, next) {
   
   const users = sessionDb.listUsers ().map (user => {
-    return {username: user.username, models: user.listModels(), principal: req.headers ['x-ms-client-principal-name']}
+    return {username: user.username, models: user.listModels()}
   })
   let headers = req.headers
   res.render('users', {
     title: 'Students',
     users,
+    principal: req.headers ['x-ms-client-principal-name'],
     headers: Object.keys (headers).map (key => {
       return {key, value: headers [key]}
     })
