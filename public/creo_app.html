@@ -12,7 +12,7 @@
       rest = new RestClient (url)
     })
     function clearListeners () { CreoJS.clearListeners() }
-    const username = pfcSession.Current.GetEnvironmentVariable ('USERNAME')
+    const username =((s,d)=>(s != '') ? s : d) (pfcSession.Current.GetEnvironmentVariable ('USERNAME'),'creo_guest') 
     print (`initialized for ${username}`)
   </script>
   <script>
