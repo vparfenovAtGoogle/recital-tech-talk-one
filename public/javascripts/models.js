@@ -31,5 +31,5 @@ function preview3D (previewUrl) {
       else {
           stl_viewer.add_model ({id:1, filename:previewUrl})
       }
-  }, 100)
+  }, 1000)
 }
