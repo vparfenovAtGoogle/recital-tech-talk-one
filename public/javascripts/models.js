@@ -15,8 +15,11 @@ var stl_viewer=null
 function preview3D (previewUrl) {
   if (stl_viewer) stl_viewer.clean()
   stlButton.click()
-  setTimeout (function () {
-      if (!stl_viewer) {
+  function show () {
+    if (!stlWindow.offsetHeight) {
+      setTimeout (show, 100)
+    }
+    else if (!stl_viewer) {
         stl_viewer=new StlViewer(stlWindow, {
             models: [ {id:1, filename:previewUrl} ],
             all_loaded_callback: function () {
@@ -26,10 +29,11 @@ function preview3D (previewUrl) {
             canvas_width: "100%",
             canvas_height: "100%",
             load_three_files: "libs/stlviewer/"
-            });
+          });
       }
       else {
           stl_viewer.add_model ({id:1, filename:previewUrl})
       }
-  }, 1000)
+  }
+  setTimeout (show, 100)
 }
