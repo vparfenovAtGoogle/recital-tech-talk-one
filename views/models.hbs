@@ -1,3 +1,26 @@
+<button id="stl_button" style="display:none" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+    Launch demo modal
+</button>
+  
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">STL View</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div style="border: 1px dashed rgb(0, 0, 0); border-radius: 15px; background: rgb(238, 238, 238); display: block; height: 468px; width: 468px;" id="stl_cont"></div>
+            <div style="width:100%; margin-top: 15px">Comment: <input style="width:83%;" type="text"></div>
+        </div>
+        <div class="modal-footer">
+        </div>
+        </div>
+    </div>
+</div>
 <h2>Student: <a href="/users#{{student}}">{{student}}</a></h2>
 <h3>Model: {{model}}</h3>
 <table class="table table-hover table-condensed table-bordered table-sm">
@@ -19,7 +42,8 @@
             <img style="filter: brightness(75%);" title="Login to like this submission" height="32" width="32" src="/images/favorite-icon.png">
           {{/if}}
         </td><td>
-          <a title="Open in Creo" href="javascript:openInCreo ('{{submission}}')"><img style="border: 2px solid red ;border-radius: 25px;" height="150" width="150" src="{{url}}"></a>
+          <a title="Preview 3D" href="javascript:preview3D ('{{stlUrl}}')"><img style="border: 2px solid red ;border-radius: 25px;" height="150" width="150" src="{{url}}"></a>
+          <!--a title="Open in Creo" href="javascript:openInCreo ('{{submission}}')"><img style="border: 2px solid red ;border-radius: 25px;" height="150" width="150" src="{{url}}"></a-->
         </td>
       {{else}}
        <td></td><td>
@@ -29,3 +53,7 @@
   </tr>
   {{/each}}
 </table>
+<script>
+  var stlWindow = document.getElementById("stl_cont")
+  var stlButton = document.getElementById("stl_button")
+</script>

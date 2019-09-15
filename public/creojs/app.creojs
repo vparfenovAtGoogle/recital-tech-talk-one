@@ -63,9 +63,16 @@
 						const session = res.result
 						const model = session.getUser.getModel
 						const submission = model.addSubmission
+						print (JSON.stringify (session, null, 2))
 						print (`fileName: ${uploadFileName}, fieldName: ${submission.fileName}, appdir: ${session.modelsUri}/${model.uri}`)
 						//uploadFileAs ({fileName: uploadFileName, fieldName: change.imageFile, appdir: `${session.imagesUri}/${model.uri}`})
-						uploadFileAs ({fileName: `${uploadFileName}`, fieldName: submission.fileName, appdir: `${session.modelsUri}/${model.uri}`})
+						const instructions = pfcSTLBinaryExportInstructions.Create(null)
+						const stlFileName = uploadFileName + '.stl'
+						instructions.Quality = 10
+						pfcSession.Current.CurrentModel.Export (stlFileName, instructions)
+						//print (`stlFile: ${uploadFileName + '.stl'}`)
+						uploadFileAs ({fileName: uploadFileName, fieldName: submission.fileName, appdir: `${session.modelsUri}/${model.uri}`})
+						uploadFileAs ({fileName: stlFileName, fieldName: `${submission.fileName}.stl`, appdir: `${session.imagesUri}/${model.uri}`})
 					})
 					.catch (res => print (`Upload error: ${JSON.stringify (res, null, 2)}`))
 			}

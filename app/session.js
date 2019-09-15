@@ -48,6 +48,9 @@ class ModelSubmission extends ModelAuditRecord  {
     if (changeCount > 0) model.changes [this.lastChange].submission = this
   }
   get fileName () {return this.uuid}
+  get stlFile () {return `${this.uuid}.stl`}
+  get stlUri () {return `${this.model.uri}/${this.stlFile}`}
+  get stlDownloadUri () {return `${this.model.user.session.imagesUri}/${this.stlUri}`}
   like (username, like=true) {
     if (like) {
       this.likes [username] = username
@@ -61,7 +64,7 @@ class ModelSubmission extends ModelAuditRecord  {
   }
   get likeCount () {return Object.keys (this.likes).length}
   toJSON () {
-    return {uuid: this.uuid, fileName: this.fileName, lastChange: this.lastChange, likes: this.likeCount}
+    return {uuid: this.uuid, fileName: this.fileName, stlDownloadUri: this.stlDownloadUri, lastChange: this.lastChange, likes: this.likeCount}
   }
 }
 
