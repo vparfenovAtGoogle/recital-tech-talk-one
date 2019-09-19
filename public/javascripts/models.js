@@ -10,6 +10,29 @@ function openInCreo (submission) {
   alert ('TODO: openInCreo (' + submission + ')')
 }
 
+function load_progess_3d(load_status, load_session)
+{
+  var loaded=0;
+  var total=0;
+  
+  //go over all models that are/were loaded
+  Object.keys(load_status).forEach(function(model_id)
+  {
+    if (load_status[model_id].load_session==load_session) //need to make sure we're on the last loading session (not counting previous loaded models)
+    {
+      loaded+=load_status[model_id].loaded;
+      total+=load_status[model_id].total;
+    }
+  });
+  //set total progress bar
+  document.getElementById("load_progess_3d").style.width = (loaded/total*100).toFixed (0) + '%';
+  if (loaded/total==1) {
+    setTimeout (function () {
+      document.getElementById("load_progess_3d_bar").style.display = 'none'
+    }, 1000)
+  }
+}	
+
 var stl_viewer=null
 
 function preview3D (previewUrl) {
@@ -22,10 +45,11 @@ function preview3D (previewUrl) {
     else if (!stl_viewer) {
         stl_viewer=new StlViewer(stlWindow, {
             models: [ {id:1, filename:previewUrl} ],
+            loading_progress_callback: load_progess_3d,
             all_loaded_callback: function () {
                 //stl_viewer.set_color(1, "#00FF00")
                 //stl_viewer.set_zoom (-3)
-            },
+              },
             canvas_width: "100%",
             canvas_height: "100%",
             load_three_files: "libs/stlviewer/"

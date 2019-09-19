@@ -6,18 +6,53 @@
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">STL View</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body">
-            <div style="border: 1px dashed rgb(0, 0, 0); border-radius: 15px; background: rgb(238, 238, 238); display: block; height: 468px; width: 468px;" id="stl_cont"></div>
-            <div style="width:100%; margin-top: 15px">Comment: <input style="width:83%;" type="text"></div>
-        </div>
-        <div class="modal-footer">
-        </div>
+          <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">STL View</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              <div style="border: 1px dashed rgb(0, 0, 0); border-radius: 15px; background: rgb(238, 238, 238); display: block; height: 468px; width: 468px;" id="stl_cont"></div>
+              <div id="load_progess_3d_bar" style="width:86%; margin-left:4%;position:absolute; top:45%" class="progress">
+                <div id="load_progess_3d" class="progress-bar" style="width:0%"></div>
+              </div>
+              <table style="width:100%; table-layout: fixed; margin-top:15px"><tr>
+                <td style="text-align:center" title="Previous submission">
+                  <button type="button" class="btn btn-sm btn-outline-dark">
+                    <i style="font-size:24px;" class="fa fa-caret-square-o-left"></i>
+                  </button>
+                </td>
+                <td style="text-align:center" title="Download and Open">
+                  <button type="button" class="btn btn-sm btn-outline-dark">
+                    <i style="font-size:24px;" class="fa fa-cloud-download"></i>
+                  </button>
+                </td>
+                <td style="text-align:center" title="Next submission">
+                  <button type="button" class="btn btn-sm btn-outline-dark">
+                    <i style="font-size:24px;" class="fa fa-caret-square-o-right"></i>
+                  </button>
+                </td>
+              </tr></table>
+            </div>
+          <div class="modal-footer">
+            <div class="input-group mb-3">
+              <!--div class="input-group-prepend">
+                <span class="input-group-text">Comment:</span>
+              </div-->
+              <input type="text" class="form-control" placeholder="Enter your comment" id="comment" name="comment">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button"><i class="fa fa-send"></i></button>
+              </div>
+            </div>
+            <!--div style="width:100%; display:table">
+              <label for="comment_input" style="display:table-cell; width:1px">Comment:&nbsp;</label>
+              <input id="comment_input" style="display:table-cell; width:100%" type="text">
+              <button type="button" class="btn btn-sm btn-outline-dark" style="display:table-cell">
+                    <i style="font-size:24px;" class="fa fa-send"></i>
+              </button>
+            </div-->
+          </div>
         </div>
     </div>
 </div>
