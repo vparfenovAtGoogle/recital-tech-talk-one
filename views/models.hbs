@@ -1,19 +1,15 @@
-<button id="stl_button" style="display:none" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-    Launch demo modal
-</button>
-  
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="preview3DPopup" tabindex="-1" role="dialog" aria-labelledby="preview3DPopupLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">STL View</h5>
+              <h5 class="modal-title" id="preview3DPopupLabel">STL View</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
               </button>
           </div>
           <div class="modal-body">
-              <div style="border: 1px dashed rgb(0, 0, 0); border-radius: 15px; background: rgb(238, 238, 238); display: block; height: 468px; width: 468px;" id="stl_cont"></div>
+              <div style="border: 1px dashed rgb(0, 0, 0); border-radius: 15px; background: rgb(238, 238, 238); display: block; width: 100%;" id="stl_cont"></div>
               <div id="load_progess_3d_bar" style="width:86%; margin-left:4%; position:absolute; top:45%" class="progress">
                 <div id="load_progess_3d" class="progress-bar" style="width:0%"></div>
               </div>
@@ -37,21 +33,11 @@
             </div>
           <div class="modal-footer">
             <div class="input-group mb-3">
-              <!--div class="input-group-prepend">
-                <span class="input-group-text">Comment:</span>
-              </div-->
               <input type="text" class="form-control" placeholder="Enter your comment" id="comment" name="comment">
               <div class="input-group-append">
                 <button class="btn btn-outline-secondary" type="button"><i class="fa fa-send"></i></button>
               </div>
             </div>
-            <!--div style="width:100%; display:table">
-              <label for="comment_input" style="display:table-cell; width:1px">Comment:&nbsp;</label>
-              <input id="comment_input" style="display:table-cell; width:100%" type="text">
-              <button type="button" class="btn btn-sm btn-outline-dark" style="display:table-cell">
-                    <i style="font-size:24px;" class="fa fa-send"></i>
-              </button>
-            </div-->
           </div>
         </div>
     </div>
@@ -78,7 +64,6 @@
           {{/if}}
         </td><td>
           <a title="Preview 3D" href="javascript:preview3D ('{{stlUrl}}')"><img style="border: 2px solid red ;border-radius: 25px;" height="150" width="150" src="{{url}}"></a>
-          <!--a title="Open in Creo" href="javascript:openInCreo ('{{submission}}')"><img style="border: 2px solid red ;border-radius: 25px;" height="150" width="150" src="{{url}}"></a-->
         </td>
       {{else}}
        <td></td><td>
@@ -90,7 +75,6 @@
 </table>
 <script>
   var stlWindow = document.getElementById("stl_cont")
-  var stlButton = document.getElementById("stl_button")
   var progressBar = document.getElementById("load_progess_3d_bar")
   var progressStrip = document.getElementById("load_progess_3d")
 </script>

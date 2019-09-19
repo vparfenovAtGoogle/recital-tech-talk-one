@@ -29,7 +29,7 @@ function load_progess_3d(load_status, load_session)
   if (loaded/total==1) {
     setTimeout (function () {
       progressBar.style.display = 'none'
-    }, 1000)
+    }, 700)
   }
 }	
 
@@ -37,7 +37,7 @@ var stl_viewer=null
 
 function preview3D (previewUrl) {
   if (stl_viewer) stl_viewer.clean()
-  stlButton.click()
+  $('#preview3DPopup').modal()
   function show () {
     if (!stlWindow.offsetHeight) {
       setTimeout (show, 100)
@@ -46,6 +46,8 @@ function preview3D (previewUrl) {
       progressBar.style.display = ''
       progressStrip.style.width = '1%'
       if (!stl_viewer) {
+        var stw = $(stlWindow)
+        stw.css({'height': stw.width()+'px'});
         stl_viewer=new StlViewer(stlWindow, {
             models: [ {id:1, filename:previewUrl} ],
             loading_progress_callback: load_progess_3d,
@@ -63,5 +65,5 @@ function preview3D (previewUrl) {
       }
     }
   }
-  setTimeout (show, 100)
+  show ()
 }
