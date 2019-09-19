@@ -25,10 +25,10 @@ function load_progess_3d(load_status, load_session)
     }
   });
   //set total progress bar
-  document.getElementById("load_progess_3d").style.width = (loaded/total*100).toFixed (0) + '%';
+  progressStrip.style.width = (loaded/total*100).toFixed (0) + '%';
   if (loaded/total==1) {
     setTimeout (function () {
-      document.getElementById("load_progess_3d_bar").style.display = 'none'
+      progressBar.style.display = 'none'
     }, 1000)
   }
 }	
@@ -42,7 +42,10 @@ function preview3D (previewUrl) {
     if (!stlWindow.offsetHeight) {
       setTimeout (show, 100)
     }
-    else if (!stl_viewer) {
+    else {
+      progressBar.style.display = ''
+      progressStrip.style.width = '1%'
+      if (!stl_viewer) {
         stl_viewer=new StlViewer(stlWindow, {
             models: [ {id:1, filename:previewUrl} ],
             loading_progress_callback: load_progess_3d,
@@ -58,6 +61,7 @@ function preview3D (previewUrl) {
       else {
           stl_viewer.add_model ({id:1, filename:previewUrl})
       }
+    }
   }
   setTimeout (show, 100)
 }
