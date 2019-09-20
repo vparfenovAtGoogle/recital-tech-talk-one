@@ -8,6 +8,7 @@ router.get('/', function(req, res, next) {
   const modelName = req.query.model
   const model = sessionDb.getUser (user).getModel (modelName)
   const session = model.user.session
+  let subIdx = 0
   const changes = model.listChanges ().map (change => {
     const submission = change.submission
    return {
@@ -18,6 +19,7 @@ router.get('/', function(req, res, next) {
       url: change.downloadUri,
       submission: submission ? `username=${user}&model=${modelName}&submission=${submission.fileName}` : undefined,
       stlUrl: submission ? submission.stlDownloadUri : undefined,
+      subIdx: submission ? subIdx++ : undefined,
       uuid: submission ? submission.uuid : undefined,
       likes: submission ? submission.likeCount : undefined
     }

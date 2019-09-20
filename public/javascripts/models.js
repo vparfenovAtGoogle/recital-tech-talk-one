@@ -35,9 +35,13 @@ function load_progess_3d(load_status, load_session)
 
 var stl_viewer=null
 
-function preview3D (previewUrl) {
+function preview3D (subIdx, navigation) {
   if (stl_viewer) stl_viewer.clean()
-  $('#preview3DPopup').modal()
+  currentSubIdx = parseInt (subIdx)
+  prevButton.disabled = currentSubIdx === 0
+  nextButton.disabled = currentSubIdx === (submissions.length-1)
+  var previewUrl = submissions [currentSubIdx].url
+  if (!navigation) $('#preview3DPopup').modal()
   function show () {
     if (!stlWindow.offsetHeight) {
       setTimeout (show, 100)
@@ -66,4 +70,16 @@ function preview3D (previewUrl) {
     }
   }
   show ()
+}
+
+function prevSubmission() {
+  if (currentSubIdx > 0) preview3D (currentSubIdx-1, true)
+}
+
+function nextSubmission() {
+  if (currentSubIdx < (submissions.length-1)) preview3D (currentSubIdx+1, true)
+}
+
+function downloadAndOpen() {
+  alert (JSON.stringify (stl_viewer.get_model_info (1), null, 2))
 }

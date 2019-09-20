@@ -15,17 +15,17 @@
               </div>
               <table style="width:100%; table-layout: fixed; margin-top:15px"><tr>
                 <td style="text-align:center" title="Previous submission">
-                  <button type="button" class="btn btn-sm btn-outline-dark">
+                  <button type="button" class="btn btn-sm btn-outline-dark" id="prev_button" onclick="prevSubmission()">
                     <i style="font-size:24px;" class="fa fa-caret-square-o-left"></i>
                   </button>
                 </td>
                 <td style="text-align:center" title="Download and Open">
-                  <button type="button" class="btn btn-sm btn-outline-dark">
+                  <button type="button" class="btn btn-sm btn-outline-dark" onclick="downloadAndOpen()">
                     <i style="font-size:24px;" class="fa fa-cloud-download"></i>
                   </button>
                 </td>
                 <td style="text-align:center" title="Next submission">
-                  <button type="button" class="btn btn-sm btn-outline-dark">
+                  <button type="button" class="btn btn-sm btn-outline-dark" id="next_button" onclick="nextSubmission()">
                     <i style="font-size:24px;" class="fa fa-caret-square-o-right"></i>
                   </button>
                 </td>
@@ -63,7 +63,7 @@
             <img style="filter: brightness(75%);" title="Login to like this submission" height="32" width="32" src="/images/favorite-icon.png">
           {{/if}}
         </td><td>
-          <a title="Preview 3D" href="javascript:preview3D ('{{stlUrl}}')"><img style="border: 2px solid red ;border-radius: 25px;" height="150" width="150" src="{{url}}"></a>
+          <a title="Preview 3D" href="javascript:preview3D ('{{subIdx}}')"><img style="border: 2px solid red ;border-radius: 25px;" height="150" width="150" src="{{url}}"></a>
         </td>
       {{else}}
        <td></td><td>
@@ -74,7 +74,16 @@
   {{/each}}
 </table>
 <script>
+  var prevButton = document.getElementById("prev_button")
+  var nextButton = document.getElementById("next_button")
   var stlWindow = document.getElementById("stl_cont")
   var progressBar = document.getElementById("load_progess_3d_bar")
   var progressStrip = document.getElementById("load_progess_3d")
+  var submissions = []
+  var currentSubIdx = -1
+  {{#each changes}}
+    {{#if submission}}
+      submissions.push ({url:'{{stlUrl}}', id: '{{id}}'})
+    {{/if}}
+  {{/each}}
 </script>
